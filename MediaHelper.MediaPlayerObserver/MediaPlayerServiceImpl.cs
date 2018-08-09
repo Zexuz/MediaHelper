@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Grpc.Core;
-using MediaHelper.Protobuf.generated;
+using LocalNetflix.Protobuf.MediaPlayerModels;
+using LocalNetflix.Protobuf.MediaPlayerServices;
+using LocalNetflix.Protobuf.MiscModels;
 using MPC_HC.Domain;
 
 namespace MediaHelper.MediaPlayerObserver
@@ -9,21 +11,43 @@ namespace MediaHelper.MediaPlayerObserver
     public class MediaPlayerServiceImpl : MediaPlayerService.MediaPlayerServiceBase
     {
         private readonly IMPCHomeCinema _mpcHomeCinemaClient;
-        private          ProcessManager _processManager;
+        private readonly ProcessManager _processManager;
         private          string         _mpchcPath;
 
         public MediaPlayerServiceImpl(IMPCHomeCinema mpcHomeCinemaClient)
         {
             _mpcHomeCinemaClient = mpcHomeCinemaClient;
-            _mpchcPath = @"C:\Program Files (x86)\MPC-HC\mpc-hc.exe";
             _processManager = ProcessManager.Instance;
+        }
+
+        public override Task<EmptyMessage> Init(Init request, ServerCallContext context)
+        {
+            _mpchcPath = request.MediaPlayerPath;
+            return Task.FromResult(new EmptyMessage());
+        }
+
+        public override Task<EmptyMessage> Start(EmptyMessage request, ServerCallContext context)
+        {
+            _processManager.StartProcess(_mpchcPath);
+            return Task.FromResult(new EmptyMessage());
+        }
+
+        public override Task<IsRunning> IsRunning(EmptyMessage request, ServerCallContext context)
+        {
+            return Task.FromResult(new IsRunning
+            {
+                Value = _processManager.IsProcessRunning(_mpchcPath)
+            });
+        }
+
+        public override Task<EmptyMessage> Stop(EmptyMessage request, ServerCallContext context)
+        {
+            _processManager.StopProcess(_mpchcPath);
+            return Task.FromResult(new EmptyMessage());
         }
 
         public override async Task<EmptyMessage> Open(OpenFile request, ServerCallContext context)
         {
-            if (!_processManager.IsProcessRunning(_mpchcPath))
-                _processManager.StartProcess(_mpchcPath);
-            
             await _mpcHomeCinemaClient.OpenFileAsync(request.FileName);
             await Task.Delay(1000);
             await _mpcHomeCinemaClient.SetPosition(TimeSpan.FromSeconds(request.FromSeconds));

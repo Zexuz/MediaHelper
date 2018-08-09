@@ -5,9 +5,11 @@
 #pragma warning disable 1591, 0612, 3021
 #region Designer generated code
 
+using pb = global::Google.Protobuf;
+using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
-
-namespace MediaHelper.Protobuf.generated {
+using scg = global::System.Collections.Generic;
+namespace LocalNetflix.Protobuf.MediaPlayerServices {
 
   /// <summary>Holder for reflection information generated from MediaPlayerService.proto</summary>
   public static partial class MediaPlayerServiceReflection {
@@ -24,13 +26,19 @@ namespace MediaHelper.Protobuf.generated {
           string.Concat(
             "ChhNZWRpYVBsYXllclNlcnZpY2UucHJvdG8SE01lZGlhUGxheWVyU2Vydmlj",
             "ZXMaF01lZGlhUGxheWVyTW9kZWxzLnByb3RvGhBNaXNjTW9kZWxzLnByb3Rv",
-            "MpoBChJNZWRpYVBsYXllclNlcnZpY2USRQoESW5mbxIYLk1pc2NNb2RlbHMu",
+            "MpMDChJNZWRpYVBsYXllclNlcnZpY2USRQoESW5mbxIYLk1pc2NNb2RlbHMu",
             "RW1wdHlNZXNzYWdlGiMuTWVkaWFQbGF5ZXJNb2RlbHMuUGxheWluZ01lZGlh",
             "SW5mbxI9CgRPcGVuEhsuTWVkaWFQbGF5ZXJNb2RlbHMuT3BlbkZpbGUaGC5N",
-            "aXNjTW9kZWxzLkVtcHR5TWVzc2FnZUIsqgIpTG9jYWxOZXRmbGl4LlByb3Rv",
-            "YnVmLk1lZGlhUGxheWVyU2VydmljZXNiBnByb3RvMw=="));
+            "aXNjTW9kZWxzLkVtcHR5TWVzc2FnZRI7CgVTdGFydBIYLk1pc2NNb2RlbHMu",
+            "RW1wdHlNZXNzYWdlGhguTWlzY01vZGVscy5FbXB0eU1lc3NhZ2USOgoEU3Rv",
+            "cBIYLk1pc2NNb2RlbHMuRW1wdHlNZXNzYWdlGhguTWlzY01vZGVscy5FbXB0",
+            "eU1lc3NhZ2USQwoJSXNSdW5uaW5nEhguTWlzY01vZGVscy5FbXB0eU1lc3Nh",
+            "Z2UaHC5NZWRpYVBsYXllck1vZGVscy5Jc1J1bm5pbmcSOQoESW5pdBIXLk1l",
+            "ZGlhUGxheWVyTW9kZWxzLkluaXQaGC5NaXNjTW9kZWxzLkVtcHR5TWVzc2Fn",
+            "ZUIsqgIpTG9jYWxOZXRmbGl4LlByb3RvYnVmLk1lZGlhUGxheWVyU2Vydmlj",
+            "ZXNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::MediaHelper.Protobuf.generated.MediaPlayerModelsReflection.Descriptor, global::MediaHelper.Protobuf.generated.MiscModelsReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::LocalNetflix.Protobuf.MediaPlayerModels.MediaPlayerModelsReflection.Descriptor, global::LocalNetflix.Protobuf.MiscModels.MiscModelsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null));
     }
     #endregion

@@ -2,7 +2,6 @@
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
-using MediaHelper.Backend;
 using MediaHelper.Model;
 using MediaHelper.Protobuf.grpc.Impl;
 using Microsoft.AspNetCore.Mvc;
