@@ -10,6 +10,11 @@ namespace MediaHelper.MediaPlayerObserver
 {
     public class MediaPlayerServiceImpl : MediaPlayerService.MediaPlayerServiceBase
     {
+        public static event EventHandler StopEvent; 
+        public static event EventHandler StartEvent; 
+        public static event EventHandler InitEvent;
+        
+        
         private readonly IMPCHomeCinema _mpcHomeCinemaClient;
         private readonly ProcessManager _processManager;
         private          string         _mpchcPath;
@@ -23,12 +28,22 @@ namespace MediaHelper.MediaPlayerObserver
         public override Task<EmptyMessage> Init(Init request, ServerCallContext context)
         {
             _mpchcPath = request.MediaPlayerPath;
+            InitEvent?.Invoke(this, EventArgs.Empty);
             return Task.FromResult(new EmptyMessage());
         }
 
         public override Task<EmptyMessage> Start(EmptyMessage request, ServerCallContext context)
         {
             _processManager.StartProcess(_mpchcPath);
+            try
+            {
+                StartEvent?.Invoke(this,EventArgs.Empty);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             return Task.FromResult(new EmptyMessage());
         }
 
@@ -43,6 +58,7 @@ namespace MediaHelper.MediaPlayerObserver
         public override Task<EmptyMessage> Stop(EmptyMessage request, ServerCallContext context)
         {
             _processManager.StopProcess(_mpchcPath);
+            StopEvent?.Invoke(this, EventArgs.Empty);
             return Task.FromResult(new EmptyMessage());
         }
 

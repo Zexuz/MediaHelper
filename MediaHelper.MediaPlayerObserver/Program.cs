@@ -37,15 +37,6 @@ namespace MediaHelper.MediaPlayerObserver
             }
         }
 
-        private static async Task StartAndSetupMpcHcObserver(MPCHomeCinema mpcClient, IModel channel)
-        {
-            var mpcHcObserver = new MPCHomeCinemaObserver(mpcClient);
-
-            mpcHcObserver.PropertyChanged += (sender, args) => PropChanged(args, channel);
-
-            await mpcHcObserver.Start();
-        }
-
         private static void StartGrpcServer(string ip, int port, MPCHomeCinema mpcClient)
         {
             var server = new MediaPlayerServer(ip, port, mpcClient);
@@ -53,6 +44,17 @@ namespace MediaHelper.MediaPlayerObserver
             server.Start();
             Console.WriteLine($"Started GRPC server on {ip}:{port}");
         }
+
+        private static async Task StartAndSetupMpcHcObserver(MPCHomeCinema mpcClient, IModel channel)
+        {
+            var mpcHcObserver = new MPCHomeCinemaObserver(mpcClient);
+
+            mpcHcObserver.PropertyChanged += (sender, args) => PropChanged(args, channel);
+
+            MediaPlayerServiceImpl.StopEvent += async (sender, args) => await mpcClient.StopAsync();
+            MediaPlayerServiceImpl.StartEvent += async (sender, args) => await mpcHcObserver.Start();
+        }
+
 
         private static void PropChanged(PropertyChangedEventArgs e, IModel channel)
         {

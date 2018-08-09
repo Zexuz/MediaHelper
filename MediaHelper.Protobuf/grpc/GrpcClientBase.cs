@@ -35,7 +35,7 @@ namespace MediaHelper.Protobuf.grpc
         {
             _channel.ShutdownAsync().Wait();
         }
-        
+
         protected static async Task<GrpcResponse<TEntity>> ExecuteAsync<TEntity>(AsyncUnaryCall<TEntity> action) where TEntity : class
         {
             try
@@ -48,7 +48,7 @@ namespace MediaHelper.Protobuf.grpc
                 return HandleError<TEntity>(e);
             }
         }
-        
+
 //        protected static async Task<GrpcResponse<TEntity>> Execute<TEntity>(Func<Task<TEntity>> action) where TEntity : class
 //        {
 //            try
@@ -61,10 +61,14 @@ namespace MediaHelper.Protobuf.grpc
 //                return HandleError<TEntity>(e);
 //            }
 //        }
-        
+
         protected virtual DateTime GetDeadline()
         {
+#if DEBUG
+            return DateTime.UtcNow.AddMilliseconds(100000);
+#else
             return DateTime.UtcNow.AddMilliseconds(500);
+#endif
         }
 
         private static GrpcResponse<T> CreateResponse<T>(T response) where T : class
