@@ -4,11 +4,6 @@
 @using Series = SonarrSharp.Models.Series
 @inject ApiClient Client
 
-
-<h1>Index</h1>
-
-<p>Welcome to your new app.</p>
-
 @if (Series == null)
 {
     <p>Loading...</p>
@@ -24,12 +19,18 @@ else
     <a href="series/@LastWatched.Id"> Go to series</a>
     <hr/>
 
-    foreach (var series in Series)
-    {
-        <a href="series/@series.Id">
-            <img src="@("http://localhost:8989" + series.Images[2].Url)" height="250" alt=""/>
-        </a>
-    }
+    <div class="flexcontainer">
+        @foreach (var series in Series)
+        {
+            <div class="series">
+                <a href="series/@series.Id">
+                    <img src="@("http://localhost:8989" + series.Images[2].Url)" height="250" alt=""/>
+                </a>
+            </div>
+        }
+    </div>
+    <div class="bottom">
+    </div>
 }
 
 
@@ -43,7 +44,7 @@ else
 
     async void Onclick()
     {
-        await Client.System.OpenFile( (int) SeriesFile.IdFromProvider, SeriesFile.Watched);
+        await Client.System.OpenFile((int) SeriesFile.IdFromProvider, SeriesFile.Watched);
     }
 
     protected override async Task OnInitAsync()

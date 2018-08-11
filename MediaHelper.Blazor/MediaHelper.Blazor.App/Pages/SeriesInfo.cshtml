@@ -3,61 +3,68 @@
 @using Episode = SonarrSharp.Models.Episode
 @inject ApiClient Client
 
-<h1></h1>
+<div class="container">
 
-<p>Welcome to your new app.</p>
+    @if (Episodes == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <a target="_blank" href="http://localhost:8989/">Go to Sonarr</a>
 
-@if (Episodes == null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Airdate</th>
-            <th>Download date</th>
-            <th>Link</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        @foreach (var season in Episodes.GroupBy(episode => episode.SeasonNumber))
-        {
-            <h3>Season @season.Key</h3>
-            foreach (var episode in season)
-            {
-                <tr>
-                    <td>@episode.Title - @($"Season {episode.SeasonNumber} Episode{episode.EpisodeNumber}")</td>
-                    <td>@episode.AirDateUtc.LocalDateTime.ToString("HH:mm:ss")</td>
-                    <td>TODO</td>
-                    @if (episode.HasFile)
-                    {
-                        <td>
-                            <a onclick="@(() => OpenFile(episode.EpisodeFileId))" class="btn">@episode.Title</a>
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            <span class="tooltipped" data-position="bottom" data-tooltip="Missing from disk">
-                                <a class="btn disabled">@episode.Title</a>
-                            </span>
-                        </td>
-                    }
-
-                </tr>
+        <ul class="collapsible popout">
+            @{
+                var order = Episodes.GroupBy(episode => episode.SeasonNumber).ToList();
             }
-            <hr/>
-        }
+            @for (int i = order.Count()-1; i >= 0; i--)
+            {
+                var season = order[i];
+                <li class="@(i == order.Count-1?"active":null)">
+                    <div class="collapsible-header">Season: @season.Key</div>
+                    <div class="collapsible-body">
+                        <table class="series-table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Airdate</th>
+                                <th>Download date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var episode in season.OrderByDescending(episode => episode.EpisodeNumber))
+                            {
+                                <tr>
+                                    <td class="episode-nr-cell">@episode.EpisodeNumber</td>
+                                    <td class="episode-nr-cell">
 
-        </tbody>
-    </table>
-}
+                                        @if (!episode.HasFile)
+                                        {
+                                            <i class="far fa-play-circle link-active" onclick="@(() => OpenFile(episode.EpisodeFileId))"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="far fa-play-circle link-disable"></i>
+                                        }
+                                    </td>
+                                    <td class="episode-title-cell">
+                                        <a href="javascript:void(0)">@episode.Title</a>
+                                    </td>
+                                    <td class="episode-airdate-cell">@episode.AirDateUtc.LocalDateTime.ToString("HH:mm:ss")</td>
+                                    <td class="episode--cell">TODO</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+            }
+        </ul>
+    }
 
-
+</div>
 
 @functions
 {
@@ -70,17 +77,13 @@ else
     protected override async Task OnInitAsync()
     {
         Episodes = await Client.Episode.GetSeasons(int.Parse(SeriesId));
-    }
-
-    protected override void OnAfterRender()
-    {
-        JSRuntime.Current.InvokeAsync<object>("addTooltip");
-        base.OnAfterRender();
+        StateHasChanged();
+        await JSRuntime.Current.InvokeAsync<object>("addTooltip");
     }
 
     private async Task OpenFile(long episodeFileId)
     {
-        await Client.System.OpenFile((int) episodeFileId,TimeSpan.Zero);
+        await Client.System.OpenFile((int) episodeFileId, TimeSpan.Zero);
     }
 
 }

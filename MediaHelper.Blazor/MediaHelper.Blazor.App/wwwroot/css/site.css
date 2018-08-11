@@ -1,0 +1,56 @@
+/* On the flex container */
+.flexcontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    align-content: flex-end;
+}
+
+.series{
+    height: 252px;
+    margin: 10px;
+    border: solid black 1px;
+}
+
+.bottom{
+    padding-bottom: 100px;
+}
+
+nav.nav-center ul {
+    text-align: center;
+}
+nav.nav-center ul li {
+    display: inline;
+    float: none;
+}
+nav.nav-center ul li a {
+    display: inline-block;
+}
+
+.episode-title-cell {
+    width: auto;
+}
+
+.episode-nr-cell {
+    width: 40px;
+}
+
+.episode-airdate-cell {
+    width: 150px;
+}
+
+.link-disable{
+    color:#e000003d;
+    cursor: not-allowed;
+}
+
+.link-active{
+    cursor: pointer;
+}
+
+table.series-table th, table.series-table td{
+    padding: 5px 5px;
+}
