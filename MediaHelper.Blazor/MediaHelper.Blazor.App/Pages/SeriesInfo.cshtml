@@ -16,51 +16,52 @@
         <ul class="collapsible popout">
             @{
                 var order = Episodes.GroupBy(episode => episode.SeasonNumber).ToList();
-            }
-            @for (int i = order.Count()-1; i >= 0; i--)
-            {
-                var season = order[i];
-                <li class="@(i == order.Count-1?"active":null)">
-                    <div class="collapsible-header">Season: @season.Key</div>
-                    <div class="collapsible-body">
-                        <table class="series-table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Airdate</th>
-                                <th>Download date</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (var episode in season.OrderByDescending(episode => episode.EpisodeNumber))
-                            {
+                for (int i = order.Count() - 1; i >= 0; i--)
+                {
+                    var season = order[i];
+                    <li class=@(i == order.Count - 1 ? "active" : null)>
+                        <div class="collapsible-header">Season: @season.Key</div>
+                        <div class="collapsible-body">
+                            <table class="series-table">
+                                <thead>
                                 <tr>
-                                    <td class="episode-nr-cell">@episode.EpisodeNumber</td>
-                                    <td class="episode-nr-cell">
-
-                                        @if (!episode.HasFile)
-                                        {
-                                            <i class="far fa-play-circle link-active" onclick="@(() => OpenFile(episode.EpisodeFileId))"></i>
-                                        }
-                                        else
-                                        {
-                                            <i class="far fa-play-circle link-disable"></i>
-                                        }
-                                    </td>
-                                    <td class="episode-title-cell">
-                                        <a href="javascript:void(0)">@episode.Title</a>
-                                    </td>
-                                    <td class="episode-airdate-cell">@episode.AirDateUtc.LocalDateTime.ToString("HH:mm:ss")</td>
-                                    <td class="episode--cell">TODO</td>
+                                    <th>#</th>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th>Airdate</th>
+                                    <th>Download date</th>
                                 </tr>
-                            }
-                            </tbody>
-                        </table>
-                    </div>
-                </li>
+                                </thead>
+                                <tbody>
+                                @foreach (var episode in season.OrderByDescending(episode => episode.EpisodeNumber))
+                                {
+                                    <tr>
+                                        <td class="episode-nr-cell">@episode.EpisodeNumber</td>
+                                        <td class="episode-nr-cell">
+
+                                            @if (!episode.HasFile)
+                                            {
+                                                <i class="far fa-play-circle link-active" onclick="@(() => OpenFile(episode.EpisodeFileId))"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="far fa-play-circle link-disable"></i>
+                                            }
+                                        </td>
+                                        <td class="episode-title-cell">
+                                            <a href="javascript:void(0)">@episode.Title</a>
+                                        </td>
+                                        <td class="episode-airdate-cell">@episode.AirDateUtc.LocalDateTime.ToString("HH:mm:ss")</td>
+                                        <td class="episode--cell">TODO</td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                }
             }
+
         </ul>
     }
 
