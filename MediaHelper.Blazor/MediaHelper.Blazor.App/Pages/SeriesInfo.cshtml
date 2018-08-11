@@ -39,7 +39,7 @@
                                         <td class="episode-nr-cell">@episode.EpisodeNumber</td>
                                         <td class="episode-nr-cell">
 
-                                            @if (!episode.HasFile)
+                                            @if (episode.HasFile)
                                             {
                                                 <i class="far fa-play-circle link-active" onclick="@(() => OpenFile(episode.EpisodeFileId))"></i>
                                             }
