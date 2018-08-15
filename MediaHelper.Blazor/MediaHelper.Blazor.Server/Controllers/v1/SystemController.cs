@@ -28,16 +28,16 @@ namespace MediaHelper.Blazor.Server.Controllers.v1
 
             var isRunningResponse = await mpcHcClient.CheckIfMediaPlayerIsRunning();
             if (isRunningResponse.IsError) return StatusCode(502);
-            
-            if(isRunningResponse.Response.Value)
+
+            if (isRunningResponse.Response.Value)
             {
                 var stopResponse = await mpcHcClient.CloseMediaPlayer();
                 if (stopResponse.IsError) return StatusCode(502);
             }
-              
+
             var startResponse = await mpcHcClient.OpenMediaPlayer();
             if (startResponse.IsError) return StatusCode(502);
-            
+
             await mpcHcClient.OpenFile(episodeFile.Path, startPosition, startInFullscreen);
 
             CurrentlyPlayingManager.EpisodeFile = episodeFile;
@@ -72,8 +72,52 @@ namespace MediaHelper.Blazor.Server.Controllers.v1
         public ActionResult UpdateMpcHcLocation(string path)
         {
             var decodedPath = WebUtility.UrlDecode(path);
-            SettingsHelper.Save(new Settings {MpcHc = decodedPath});
+            SettingsHelper.Add(new Settings {MpcHc = decodedPath});
             return Ok();
+        }
+
+        [HttpPut("sonarr/{path}")]
+        public ActionResult UpdateSonarrLocation(string path)
+        {
+            var decodedPath = WebUtility.UrlDecode(path);
+            SettingsHelper.Add(new Settings {Sonarr = decodedPath});
+            return Ok();
+        }
+
+        [HttpPut("radarr/{path}")]
+        public ActionResult UpdateRadarrLocation(string path)
+        {
+            var decodedPath = WebUtility.UrlDecode(path);
+            SettingsHelper.Add(new Settings {Radarr = decodedPath});
+            return Ok();
+        }
+
+        [HttpGet("mpchc")]
+        public ActionResult GetMpcHcLocation()
+        {
+            var mpcHcLocation = SettingsHelper.Load().MpcHc;
+            return Ok(mpcHcLocation);
+        }
+        
+        [HttpGet("sonarr")]
+        public ActionResult GetSonarrLocation()
+        {
+            var mpcHcLocation = SettingsHelper.Load().Sonarr;
+            return Ok(mpcHcLocation);
+        }
+        
+        [HttpGet("radarr")]
+        public ActionResult GetRadarrLocation()
+        {
+            var mpcHcLocation = SettingsHelper.Load().Radarr;
+            return Ok(mpcHcLocation);
+        }
+        
+        [HttpGet("settings")]
+        public ActionResult<Settings> GetSettings()
+        {
+            var mpcHcLocation = SettingsHelper.Load();
+            return Ok(mpcHcLocation);
         }
     }
 }
