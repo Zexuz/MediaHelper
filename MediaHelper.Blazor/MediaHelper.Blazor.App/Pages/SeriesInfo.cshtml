@@ -1,5 +1,7 @@
 ﻿@page "/series/{SeriesId}"
 @using MediaHelper.Blazor.App.Services
+@using MediaHelper.Model
+@using SonarrSharp.Models
 @using Episode = SonarrSharp.Models.Episode
 @inject ApiClient Client
 
@@ -12,6 +14,15 @@
     else
     {
         <a target="_blank" href="http://localhost:8989/">Go to Sonarr</a>
+
+        if (LastWatchedEpisodeFile.IsCompleted)
+        {
+            <button class="btn" onclick="@(() => OpenFile(UpNext.EpisodeFileId))" >Up next @($"Season {UpNext.SeasonNumber}, Episode {UpNext.EpisodeNumber}, {UpNext.Title}")</button>
+        }
+        else
+        {
+            <button class="btn" onclick="@(() => OpenFile(LastWatchedEpisodeFile.IdFromProvider))" >Continue watching @($"Season {LastWatched.SeasonNumber}, Episode {LastWatched.EpisodeNumber}, {LastWatched.Title}")</button>
+        }
 
         <ul class="collapsible popout">
             @{
@@ -74,10 +85,16 @@
     public string SeriesId { get; set; }
 
     private Episode[] Episodes { get; set; }
+    private Episode LastWatched { get; set; }
+    private SeriesFile LastWatchedEpisodeFile { get; set; }
+    private Episode UpNext { get; set; }
 
     protected override async Task OnInitAsync()
     {
         Episodes = await Client.Episode.GetSeasons(int.Parse(SeriesId));
+        LastWatchedEpisodeFile = await Client.History.LastWatched(int.Parse(SeriesId));
+        LastWatched = Episodes.First(episode => episode.EpisodeFileId == LastWatchedEpisodeFile.IdFromProvider);
+        UpNext = Episodes.First(episode => episode.Id == LastWatched.Id + 1);
         StateHasChanged();
         await JSRuntime.Current.InvokeAsync<object>("addTooltip");
     }

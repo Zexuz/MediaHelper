@@ -20,9 +20,15 @@ namespace MediaHelper.Blazor.App.Services
             return await _client.GetJsonAsync<SeriesFile>($"history/watched/last");
         }
 
+        public async Task<SeriesFile> LastWatched(int seriesId)
+        {
+            return await _client.GetJsonAsync<SeriesFile>($"history/watched/last/{seriesId}");
+        }
+
         public async Task<List<SeriesFile>> WatchHistory()
         {
             return await _client.GetJsonAsync<List<SeriesFile>>($"history/watched");
         }
+        
     }
 }

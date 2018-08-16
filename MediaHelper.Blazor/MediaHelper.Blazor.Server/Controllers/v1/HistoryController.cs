@@ -16,6 +16,13 @@ namespace MediaHelper.Blazor.Server.Controllers.v1
             return Ok(mediaFileService.GetLastWatched());
         }
         
+        [HttpGet("watched/last/{seriesId}")]
+        public ActionResult<MediaFile> LastWatchedEpisode(int seriesId)
+        {
+            var mediaFileService = new MedieFileService();
+            return Ok(mediaFileService.GetLastWatched(seriesId));
+        }
+        
         [HttpGet("watched")]
         public ActionResult<List<MediaFile>> WatchHistory()
         {
