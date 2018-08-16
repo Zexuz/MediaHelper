@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using MediaHelper.Blazor.App.Models;
 using MediaHelper.Model;
 
 namespace MediaHelper.Blazor.App.Services

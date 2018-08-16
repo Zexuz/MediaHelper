@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Google.Protobuf;
-using LocalNetflix.Protobuf.MediaPlayerModels;
+using MediaHelper.Protobuf.generated;
 using MPC_HC.Domain;
 using RabbitMQ.Client;
 
@@ -43,6 +43,7 @@ namespace MediaHelper.MediaPlayerObserver
                 var server = new MediaPlayerServer(ip, port, new MediaPlayerServiceImpl(mpcClient, Init, Stop, Start));
 
                 server.Start();
+                Start().Wait();
                 Console.WriteLine($"Started GRPC server on {ip}:{port}");
 
 

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using LocalNetflix.Protobuf.MediaPlayerModels;
-using LocalNetflix.Protobuf.MediaPlayerServices;
-using LocalNetflix.Protobuf.MiscModels;
+using MediaHelper.Protobuf.generated;
 using MediaHelper.Protobuf.grpc.Models;
 
 namespace MediaHelper.Protobuf.grpc.Impl

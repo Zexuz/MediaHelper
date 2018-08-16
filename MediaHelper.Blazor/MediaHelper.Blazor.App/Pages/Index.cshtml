@@ -50,7 +50,7 @@ else
     protected override async Task OnInitAsync()
     {
         Series = await Client.Series.GetAll();
-        SeriesFile = await Client.Series.LastWatched();
+        SeriesFile = await Client.History.LastWatched();
         LastWatched = Series.FirstOrDefault(series => series.Id == SeriesFile.SeriesId);
     }
 

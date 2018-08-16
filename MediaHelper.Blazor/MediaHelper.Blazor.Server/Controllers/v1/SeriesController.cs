@@ -16,12 +16,5 @@ namespace MediaHelper.Blazor.Server.Controllers.v1
             var series = await client.Series.GetSeries(true);
             return Ok(series);
         }
-
-        [HttpGet("lastWatched")]
-        public async Task<OkObjectResult> LastWatched()
-        {
-            var mediaFileService = new MedieFileService();
-            return Ok(mediaFileService.GetLastWatched());
-        }
     }
 }

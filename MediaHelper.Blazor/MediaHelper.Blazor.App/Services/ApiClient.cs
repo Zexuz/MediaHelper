@@ -8,8 +8,9 @@ namespace MediaHelper.Blazor.App.Services
         public Series  Series  { get; }
         public System  System  { get; }
         public Episode Episode { get; }
-        
-        
+        public History History { get; }
+
+
         public ApiClient(string baseUrl)
         {
             var client = new HttpClient {BaseAddress = new Uri(baseUrl)};
@@ -18,7 +19,7 @@ namespace MediaHelper.Blazor.App.Services
             Series = new Series(client);
             System = new System(client);
             Episode = new Episode(client);
+            History = new History(client);
         }
-    
     }
 }

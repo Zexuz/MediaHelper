@@ -5,11 +5,9 @@
 #pragma warning disable 1591, 0612, 3021
 #region Designer generated code
 
-using pb = global::Google.Protobuf;
-using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
-using scg = global::System.Collections.Generic;
-namespace LocalNetflix.Protobuf.MediaPlayerServices {
+
+namespace MediaHelper.Protobuf.generated {
 
   /// <summary>Holder for reflection information generated from MediaPlayerService.proto</summary>
   public static partial class MediaPlayerServiceReflection {
@@ -38,7 +36,7 @@ namespace LocalNetflix.Protobuf.MediaPlayerServices {
             "ZUIsqgIpTG9jYWxOZXRmbGl4LlByb3RvYnVmLk1lZGlhUGxheWVyU2Vydmlj",
             "ZXNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::LocalNetflix.Protobuf.MediaPlayerModels.MediaPlayerModelsReflection.Descriptor, global::LocalNetflix.Protobuf.MiscModels.MiscModelsReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::MediaHelper.Protobuf.generated.MediaPlayerModelsReflection.Descriptor, global::MediaHelper.Protobuf.generated.MiscModelsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null));
     }
     #endregion

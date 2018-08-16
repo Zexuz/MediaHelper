@@ -8,8 +8,8 @@
 using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
-using scg = global::System.Collections.Generic;
-namespace LocalNetflix.Protobuf.MediaPlayerModels {
+
+namespace MediaHelper.Protobuf.generated {
 
   /// <summary>Holder for reflection information generated from MediaPlayerModels.proto</summary>
   public static partial class MediaPlayerModelsReflection {
@@ -42,12 +42,12 @@ namespace LocalNetflix.Protobuf.MediaPlayerModels {
             "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::LocalNetflix.Protobuf.MediaPlayerModels.State), }, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfo), global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfo.Parser, new[]{ "FileName", "Duration", "Eplipsed", "State" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::LocalNetflix.Protobuf.MediaPlayerModels.OpenFile), global::LocalNetflix.Protobuf.MediaPlayerModels.OpenFile.Parser, new[]{ "FileName", "FromSeconds", "StartInFullscreen" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfoChanged), global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfoChanged.Parser, new[]{ "MediaInfo", "OldMediaInfo", "Property" }, null, new[]{ typeof(global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfoChanged.Types.MediaProperty) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::LocalNetflix.Protobuf.MediaPlayerModels.IsRunning), global::LocalNetflix.Protobuf.MediaPlayerModels.IsRunning.Parser, new[]{ "Value" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::LocalNetflix.Protobuf.MediaPlayerModels.Init), global::LocalNetflix.Protobuf.MediaPlayerModels.Init.Parser, new[]{ "MediaPlayerPath" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::MediaHelper.Protobuf.generated.State), }, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::MediaHelper.Protobuf.generated.PlayingMediaInfo), global::MediaHelper.Protobuf.generated.PlayingMediaInfo.Parser, new[]{ "FileName", "Duration", "Eplipsed", "State" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MediaHelper.Protobuf.generated.OpenFile), global::MediaHelper.Protobuf.generated.OpenFile.Parser, new[]{ "FileName", "FromSeconds", "StartInFullscreen" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MediaHelper.Protobuf.generated.PlayingMediaInfoChanged), global::MediaHelper.Protobuf.generated.PlayingMediaInfoChanged.Parser, new[]{ "MediaInfo", "OldMediaInfo", "Property" }, null, new[]{ typeof(global::MediaHelper.Protobuf.generated.PlayingMediaInfoChanged.Types.MediaProperty) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MediaHelper.Protobuf.generated.IsRunning), global::MediaHelper.Protobuf.generated.IsRunning.Parser, new[]{ "Value" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::MediaHelper.Protobuf.generated.Init), global::MediaHelper.Protobuf.generated.Init.Parser, new[]{ "MediaPlayerPath" }, null, null, null)
           }));
     }
     #endregion
@@ -72,7 +72,7 @@ namespace LocalNetflix.Protobuf.MediaPlayerModels {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::LocalNetflix.Protobuf.MediaPlayerModels.MediaPlayerModelsReflection.Descriptor.MessageTypes[0]; }
+      get { return global::MediaHelper.Protobuf.generated.MediaPlayerModelsReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -136,9 +136,9 @@ namespace LocalNetflix.Protobuf.MediaPlayerModels {
 
     /// <summary>Field number for the "State" field.</summary>
     public const int StateFieldNumber = 4;
-    private global::LocalNetflix.Protobuf.MediaPlayerModels.State state_ = 0;
+    private global::MediaHelper.Protobuf.generated.State state_ = 0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::LocalNetflix.Protobuf.MediaPlayerModels.State State {
+    public global::MediaHelper.Protobuf.generated.State State {
       get { return state_; }
       set {
         state_ = value;
@@ -268,7 +268,7 @@ namespace LocalNetflix.Protobuf.MediaPlayerModels {
             break;
           }
           case 32: {
-            state_ = (global::LocalNetflix.Protobuf.MediaPlayerModels.State) input.ReadEnum();
+            state_ = (global::MediaHelper.Protobuf.generated.State) input.ReadEnum();
             break;
           }
         }
@@ -285,7 +285,7 @@ namespace LocalNetflix.Protobuf.MediaPlayerModels {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::LocalNetflix.Protobuf.MediaPlayerModels.MediaPlayerModelsReflection.Descriptor.MessageTypes[1]; }
+      get { return global::MediaHelper.Protobuf.generated.MediaPlayerModelsReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -470,7 +470,7 @@ namespace LocalNetflix.Protobuf.MediaPlayerModels {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::LocalNetflix.Protobuf.MediaPlayerModels.MediaPlayerModelsReflection.Descriptor.MessageTypes[2]; }
+      get { return global::MediaHelper.Protobuf.generated.MediaPlayerModelsReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -500,9 +500,9 @@ namespace LocalNetflix.Protobuf.MediaPlayerModels {
 
     /// <summary>Field number for the "MediaInfo" field.</summary>
     public const int MediaInfoFieldNumber = 1;
-    private global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfo mediaInfo_;
+    private global::MediaHelper.Protobuf.generated.PlayingMediaInfo mediaInfo_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfo MediaInfo {
+    public global::MediaHelper.Protobuf.generated.PlayingMediaInfo MediaInfo {
       get { return mediaInfo_; }
       set {
         mediaInfo_ = value;
@@ -511,9 +511,9 @@ namespace LocalNetflix.Protobuf.MediaPlayerModels {
 
     /// <summary>Field number for the "OldMediaInfo" field.</summary>
     public const int OldMediaInfoFieldNumber = 2;
-    private global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfo oldMediaInfo_;
+    private global::MediaHelper.Protobuf.generated.PlayingMediaInfo oldMediaInfo_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfo OldMediaInfo {
+    public global::MediaHelper.Protobuf.generated.PlayingMediaInfo OldMediaInfo {
       get { return oldMediaInfo_; }
       set {
         oldMediaInfo_ = value;
@@ -522,9 +522,9 @@ namespace LocalNetflix.Protobuf.MediaPlayerModels {
 
     /// <summary>Field number for the "Property" field.</summary>
     public const int PropertyFieldNumber = 3;
-    private global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfoChanged.Types.MediaProperty property_ = 0;
+    private global::MediaHelper.Protobuf.generated.PlayingMediaInfoChanged.Types.MediaProperty property_ = 0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfoChanged.Types.MediaProperty Property {
+    public global::MediaHelper.Protobuf.generated.PlayingMediaInfoChanged.Types.MediaProperty Property {
       get { return property_; }
       set {
         property_ = value;
@@ -611,13 +611,13 @@ namespace LocalNetflix.Protobuf.MediaPlayerModels {
       }
       if (other.mediaInfo_ != null) {
         if (mediaInfo_ == null) {
-          mediaInfo_ = new global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfo();
+          mediaInfo_ = new global::MediaHelper.Protobuf.generated.PlayingMediaInfo();
         }
         MediaInfo.MergeFrom(other.MediaInfo);
       }
       if (other.oldMediaInfo_ != null) {
         if (oldMediaInfo_ == null) {
-          oldMediaInfo_ = new global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfo();
+          oldMediaInfo_ = new global::MediaHelper.Protobuf.generated.PlayingMediaInfo();
         }
         OldMediaInfo.MergeFrom(other.OldMediaInfo);
       }
@@ -637,20 +637,20 @@ namespace LocalNetflix.Protobuf.MediaPlayerModels {
             break;
           case 10: {
             if (mediaInfo_ == null) {
-              mediaInfo_ = new global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfo();
+              mediaInfo_ = new global::MediaHelper.Protobuf.generated.PlayingMediaInfo();
             }
             input.ReadMessage(mediaInfo_);
             break;
           }
           case 18: {
             if (oldMediaInfo_ == null) {
-              oldMediaInfo_ = new global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfo();
+              oldMediaInfo_ = new global::MediaHelper.Protobuf.generated.PlayingMediaInfo();
             }
             input.ReadMessage(oldMediaInfo_);
             break;
           }
           case 24: {
-            property_ = (global::LocalNetflix.Protobuf.MediaPlayerModels.PlayingMediaInfoChanged.Types.MediaProperty) input.ReadEnum();
+            property_ = (global::MediaHelper.Protobuf.generated.PlayingMediaInfoChanged.Types.MediaProperty) input.ReadEnum();
             break;
           }
         }
@@ -680,7 +680,7 @@ namespace LocalNetflix.Protobuf.MediaPlayerModels {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::LocalNetflix.Protobuf.MediaPlayerModels.MediaPlayerModelsReflection.Descriptor.MessageTypes[3]; }
+      get { return global::MediaHelper.Protobuf.generated.MediaPlayerModelsReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -809,7 +809,7 @@ namespace LocalNetflix.Protobuf.MediaPlayerModels {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::LocalNetflix.Protobuf.MediaPlayerModels.MediaPlayerModelsReflection.Descriptor.MessageTypes[4]; }
+      get { return global::MediaHelper.Protobuf.generated.MediaPlayerModelsReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
