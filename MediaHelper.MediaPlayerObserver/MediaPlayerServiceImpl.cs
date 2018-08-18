@@ -74,7 +74,7 @@ namespace MediaHelper.MediaPlayerObserver
         {
             await _mpcHomeCinemaClient.OpenFileAsync(request.FileName);
             await Task.Delay(1000);
-            await _mpcHomeCinemaClient.SetPosition(TimeSpan.FromSeconds(request.FromSeconds));
+            await _mpcHomeCinemaClient.SetPosition(TimeSpan.FromSeconds(request.FromSeconds)); //todo does not work!!?!?!
             await _mpcHomeCinemaClient.ToggleFullscreen();
 
             return new EmptyMessage();

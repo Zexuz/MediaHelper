@@ -36,5 +36,13 @@ function initBrowser() {
         prevArrow: $("#last-seen-prev"),
         responsive: settings,
     });
-    console.log("xd v2");
+    
+    $('.new-downloaded-carousel').slick({
+        slidesToShow: count,
+        slidesToScroll: 1,
+        speed: 300,
+        nextArrow: $("#new-downloaded-next"),
+        prevArrow: $("#new-downloaded-prev"),
+        responsive: settings,
+    });
 }

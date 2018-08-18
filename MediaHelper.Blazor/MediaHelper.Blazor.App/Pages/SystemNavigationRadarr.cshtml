@@ -23,12 +23,12 @@
     protected override async Task OnInitAsync()
     {
         await JSRuntime.Current.InvokeAsync<object>("addTooltip");
-        RadarrUrl = await Client.System.GetRadarrLocation();
+        RadarrUrl = await Client.SystemEndpoint.GetRadarrLocation();
     }
 
     private async Task Save()
     {
-        await Client.System.UpdateRadarrLocation(RadarrUrl);
+        await Client.SystemEndpoint.UpdateRadarrLocation(RadarrUrl);
     }
 
 }

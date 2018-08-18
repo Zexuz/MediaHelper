@@ -139,12 +139,12 @@
 
     private async Task OpenFile()
     {
-        await Client.System.OpenFile((int) ContinueWatching.Episode.EpisodeFileId, ContinueWatching.WhereToStart);
+        await Client.SystemEndpoint.OpenFile((int) ContinueWatching.Episode.EpisodeFileId, ContinueWatching.WhereToStart);
     }
 
     private async Task OpenFile(long episodeFileId)
     {
-        await Client.System.OpenFile((int) episodeFileId, TimeSpan.Zero);
+        await Client.SystemEndpoint.OpenFile((int) episodeFileId, TimeSpan.Zero);
     }
 
     private bool IsCurrentSeries(long seasonNr)

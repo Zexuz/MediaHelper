@@ -23,13 +23,13 @@
     protected override async Task OnInitAsync()
     {
         await JSRuntime.Current.InvokeAsync<object>("addTooltip");
-        SonarrUrl = await Client.System.GetSonarrLocation();
+        SonarrUrl = await Client.SystemEndpoint.GetSonarrLocation();
 
     }
     
     private async Task Save()
     {
-        await Client.System.UpdateSonarrLocation(SonarrUrl);
+        await Client.SystemEndpoint.UpdateSonarrLocation(SonarrUrl);
     }
 
 }

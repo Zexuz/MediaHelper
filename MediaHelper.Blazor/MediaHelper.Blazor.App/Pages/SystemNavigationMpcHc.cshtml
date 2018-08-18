@@ -79,7 +79,7 @@
     {
         await DisplaySystemDrives();
         await JSRuntime.Current.InvokeAsync<object>("addTooltip");
-        CurrentSelectedFile = await Client.System.GetMpcHcLocation();
+        CurrentSelectedFile = await Client.SystemEndpoint.GetMpcHcLocation();
     }
 
     async Task DisplaySystemDrives()
@@ -110,7 +110,7 @@
 
     private async Task SaveMpcHcLocation()
     {
-        await Client.System.UpdateMpcHcLocation(CurrentSelectedFile);
+        await Client.SystemEndpoint.UpdateMpcHcLocation(CurrentSelectedFile);
     }
 
     private void SelectFile(string fileName)

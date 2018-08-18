@@ -30,5 +30,16 @@ namespace MediaHelper.Blazor.App.Services
             return await _client.GetJsonAsync<List<SeriesFile>>($"history/watched");
         }
         
+        public async Task<SonarrSharp.Models.Series[]> LatestWatchedSeries()
+        {
+            return await _client.GetJsonAsync<SonarrSharp.Models.Series[]>($"history/watched/series");
+        }
+        
+        
+        public async Task<SonarrSharp.Models.Series[]> GetDownloadHistory()
+        {
+            return await _client.GetJsonAsync<SonarrSharp.Models.Series[]>($"history/downloaded");
+        }
+        
     }
 }

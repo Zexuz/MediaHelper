@@ -8,11 +8,11 @@ using Newtonsoft.Json;
 
 namespace MediaHelper.Blazor.App.Services
 {
-    public class System
+    public class SystemEndpoint
     {
         private readonly HttpClient _client;
 
-        public System(HttpClient client)
+        public SystemEndpoint(HttpClient client)
         {
             _client = client;
         }
