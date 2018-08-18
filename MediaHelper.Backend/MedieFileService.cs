@@ -37,7 +37,7 @@ namespace MediaHelper.Backend
 
         public MediaFile GetLastWatched(int seriesId)
         {
-            return _repo.GetAll().OrderByDescending(file => file.LastWatched).First(file => file.SeriesId == seriesId);
+            return _repo.GetAll().OrderByDescending(file => file.LastWatched).FirstOrDefault(file => file.SeriesId == seriesId);
         }
     }
 }
