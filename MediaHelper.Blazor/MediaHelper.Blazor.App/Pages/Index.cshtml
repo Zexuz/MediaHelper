@@ -13,17 +13,17 @@ else
     <SeriesNavigation ClassName="new-downloaded" Text="Recently downloaded"></SeriesNavigation>
     
     <div class="new-downloaded-carousel ">
-        <ListSeriesThumbnail BaseUrl="http://localhost:8989" Series="@(RecentlyDownloaded)" UseFlexContainer="@(false)"></ListSeriesThumbnail>
+        <ListSeriesThumbnail BaseUrl="@SonarrBaseUrl" Series="@(RecentlyDownloaded)" UseFlexContainer="@(false)"></ListSeriesThumbnail>
     </div>
 
     <SeriesNavigation ClassName="last-seen" Text="Last seen"></SeriesNavigation>
 
     <div class="last-seen-carousel ">
-        <ListSeriesThumbnail BaseUrl="http://localhost:8989" Series="@(LastSeen)" UseFlexContainer="@(false)"></ListSeriesThumbnail>
+        <ListSeriesThumbnail BaseUrl="@SonarrBaseUrl" Series="@(LastSeen)" UseFlexContainer="@(false)"></ListSeriesThumbnail>
     </div>
 
     <h3 class="center-align">Browse</h3>
-    <ListSeriesThumbnail BaseUrl="http://localhost:8989" Series="@(Series)" UseFlexContainer="@(true)"></ListSeriesThumbnail>
+    <ListSeriesThumbnail BaseUrl="@SonarrBaseUrl" Series="@(Series)" UseFlexContainer="@(true)"></ListSeriesThumbnail>
     
     
     <div class="bottom">
@@ -38,6 +38,7 @@ else
     private Series[] Series { get; set; }
     private Series[] LastSeen { get; set; }
     private Series[] RecentlyDownloaded { get; set; }
+    private string SonarrBaseUrl { get; set; }
 
 
     protected override async Task OnInitAsync()
@@ -45,6 +46,7 @@ else
         Series = await Client.Series.GetAll();
         RecentlyDownloaded = await Client.History.GetDownloadHistory();
         LastSeen = await Client.History.LatestWatchedSeries();
+        SonarrBaseUrl = await Client.SystemEndpoint.GetSonarrLocation();
 
         StateHasChanged();
         await JSRuntime.Current.InvokeAsync<object>("initBrowser");

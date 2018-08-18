@@ -21,7 +21,7 @@
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
                         <span class="card-title">@CurrentSeries.Title</span>
-                        <img class="left" height="200px" src="@($"http://localhost:8989{CurrentSeries.Images[2].Url}")"/>
+                        <img class="left" height="200px" src="@($"{SonarrBaseUrl}{CurrentSeries.Images[2].Url}")"/>
                         <p>@(CurrentSeries.Overview ?? "No overview")</p>
                         
                         <h5>@ContinueWatchingString @ContinueWatchingEpisodeTitle</h5>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="card-action">
                         <button class="btn" onclick="@(() => OpenFile())">Play</button>
-                        <a class="right" target="_blank" href="http://localhost:8989/series/@CurrentSeries.TitleSlug">Go to Sonarr</a>
+                        <a class="right" target="_blank" href="@SonarrBaseUrl/series/@CurrentSeries.TitleSlug">Go to Sonarr</a>
                     </div>
                 </div>
             </div>
@@ -102,6 +102,7 @@
     private ContinueWatchingResponse ContinueWatching { get; set; }
     private string ContinueWatchingString { get; set; }
     private string ContinueWatchingEpisodeTitle { get; set; }
+    private string SonarrBaseUrl { get; set; }
 
 
     protected override async Task OnInitAsync()
@@ -110,6 +111,8 @@
         Episodes = await Client.Episode.GetSeasons(seriesId);
         CurrentSeries = await Client.Series.GetById(seriesId);
         ContinueWatching = await Client.Episode.GetContinueWatching(seriesId);
+
+        SonarrBaseUrl = await Client.SystemEndpoint.GetSonarrLocation();
 
         
         switch (ContinueWatching.Status)
@@ -136,6 +139,7 @@
         StateHasChanged();
         await JSRuntime.Current.InvokeAsync<object>("addTooltip");
     }
+
 
     private async Task OpenFile()
     {
