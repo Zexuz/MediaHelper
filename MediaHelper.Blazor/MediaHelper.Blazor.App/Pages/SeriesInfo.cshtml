@@ -23,8 +23,9 @@
                         <span class="card-title">@CurrentSeries.Title</span>
                         <img class="left" height="200px" src="@($"http://localhost:8989{CurrentSeries.Images[2].Url}")"/>
                         <p>@(CurrentSeries.Overview ?? "No overview")</p>
-                        <h4>Up next: @ContinueWatchingEpisodeTitle</h4>
-                        <p>@(ContinueWatching.Episode.Overview ?? "No overview")</p>
+                        
+                        <h5>@ContinueWatchingString @ContinueWatchingEpisodeTitle</h5>
+                        <p>@(ContinueWatching.Episode?.Overview ?? "No overview")</p>
                     </div>
                     <div class="card-action">
                         <button class="btn" onclick="@(() => OpenFile())">Play</button>
@@ -40,7 +41,7 @@
                 for (int i = order.Count() - 1; i >= 0; i--)
                 {
                     var season = order[i];
-                    <li class=@(i == order.Count - 1 ? "active" : null)>
+                    <li class=@(IsCurrentSeries(season.Key)? "active" : null)>
                         <div class="collapsible-header">Season: @season.Key</div>
                         <div class="collapsible-body">
                             <table class="series-table">
@@ -110,16 +111,17 @@
         CurrentSeries = await Client.Series.GetById(seriesId);
         ContinueWatching = await Client.Episode.GetContinueWatching(seriesId);
 
+        
         switch (ContinueWatching.Status)
         {
             case ContinueWatchingStatus.InProgress:
-                ContinueWatchingString = "Continue watching";
+                ContinueWatchingString = "Continue watching:";
                 break;
             case ContinueWatchingStatus.NextEpisode:
-                ContinueWatchingString = "Next episode";
+                ContinueWatchingString = "Next episode:";
                 break;
             case ContinueWatchingStatus.NewSeries:
-                ContinueWatchingString = "Start to watch";
+                ContinueWatchingString = "Start watching:";
                 break;
             case ContinueWatchingStatus.NoNewEpisodes:
                 ContinueWatchingString = "There are no new episodes.";
@@ -129,8 +131,7 @@
         }
 
         if (ContinueWatching.Episode != null)
-            ContinueWatchingEpisodeTitle += $"Season {ContinueWatching.Episode.SeasonNumber}, Episode {ContinueWatching.Episode.EpisodeNumber}, {ContinueWatching.Episode.Title}";
-
+            ContinueWatchingEpisodeTitle += $"S{ContinueWatching.Episode.SeasonNumber}E{ContinueWatching.Episode.EpisodeNumber} {ContinueWatching.Episode.Title}";
 
         StateHasChanged();
         await JSRuntime.Current.InvokeAsync<object>("addTooltip");
@@ -146,4 +147,11 @@
         await Client.System.OpenFile((int) episodeFileId, TimeSpan.Zero);
     }
 
+    private bool IsCurrentSeries(long seasonNr)
+    {
+        if (ContinueWatching.Episode == null)
+            return false;
+        
+        return seasonNr == ContinueWatching.Episode.SeasonNumber;
+    }
 }

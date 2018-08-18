@@ -37,34 +37,33 @@ namespace MediaHelper.Blazor.Server.Controllers.v1
             if (lastWatchedMediaFile == null)
                 return Ok(new ContinueWatchingResponse
                 {
-                    Episode = episodes.First(),
+                    Episode = episodes.First(episode => episode.SeasonNumber == 1),
                     Status = ContinueWatchingStatus.NewSeries
                 });
 
             var lastWatchedEpisode = episodes.First(episode => episode.EpisodeFileId == lastWatchedMediaFile.IdFromProvider);
-            if (lastWatchedMediaFile.IsCompleted)
-            {
-                var nextEpisode = episodes.FirstOrDefault(episode => episode.Id == lastWatchedEpisode.Id + 1);
-                if(nextEpisode == null)
-                {
-                    return Ok(new ContinueWatchingResponse
-                    {
-                        Episode = null,
-                        Status = ContinueWatchingStatus.NoNewEpisodes
-                    });
-                }
+            if (!lastWatchedMediaFile.IsCompleted)
                 return Ok(new ContinueWatchingResponse
                 {
-                    Episode = nextEpisode,
-                    Status = ContinueWatchingStatus.NextEpisode
+                    Episode = lastWatchedEpisode,
+                    WhereToStart = lastWatchedMediaFile.Watched,
+                    Status = ContinueWatchingStatus.InProgress
+                });
+            
+            var nextEpisode = episodes.FirstOrDefault(episode => episode.Id == lastWatchedEpisode.Id + 1);
+            if (nextEpisode == null)
+            {
+                return Ok(new ContinueWatchingResponse
+                {
+                    Episode = null,
+                    Status = ContinueWatchingStatus.NoNewEpisodes
                 });
             }
 
             return Ok(new ContinueWatchingResponse
             {
-                Episode = lastWatchedEpisode,
-                WhereToStart = lastWatchedMediaFile.Watched,
-                Status = ContinueWatchingStatus.InProgress
+                Episode = nextEpisode,
+                Status = ContinueWatchingStatus.NextEpisode
             });
         }
     }

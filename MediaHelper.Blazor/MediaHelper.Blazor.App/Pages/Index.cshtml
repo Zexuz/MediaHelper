@@ -5,11 +5,31 @@
 @inject ApiClient Client
 
 @if (Series == null)
-{
+{ 
     <p>Loading...</p>
 }
 else
 {
+    <h3 class="center-align new-downloaded">
+        <button id="new-downloaded-prev" type="button" class="btn"><i class="fas fa-arrow-left"></i></button>
+        Newly downloaded
+        <button id="new-downloaded-next" type="button" class="btn"><i class="fas fa-arrow-right"></i></button>
+    </h3>
+    
+    <h3 class="center-align last-seen">
+        <button id="last-seen-prev" type="button" class="btn"><i class="fas fa-arrow-left"></i></button>
+        Last seen
+        <button id="last-seen-next" type="button" class="btn"><i class="fas fa-arrow-right"></i></button>
+    </h3>
+    <div class="last-seen-carousel ">
+        @foreach (var series in Series)
+        {
+            <a href="series/@series.Id">
+                <img src="@("http://localhost:8989" + series.Images[2].Url)" height="250" alt=""/>
+            </a>
+        }
+    </div>
+
     <h3>Continue watching @LastWatched.Title?</h3>
     <a href="#" onclick="@Onclick">
         <img src="@("http://localhost:8989" + LastWatched.Images[2].Url)" height="250" alt=""/>
@@ -52,6 +72,9 @@ else
         Series = await Client.Series.GetAll();
         SeriesFile = await Client.History.LastWatched();
         LastWatched = Series.FirstOrDefault(series => series.Id == SeriesFile.SeriesId);
+
+        StateHasChanged();
+        await JSRuntime.Current.InvokeAsync<object>("initBrowser");
     }
 
 }

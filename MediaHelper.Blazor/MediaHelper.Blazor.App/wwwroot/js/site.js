@@ -11,10 +11,30 @@ function init() {
     console.log("started");
 }
 
-function changeBackgroundImage(url) {
-    // var body = document.getElementsByTagName('body')[0];
-    // body.style.background = 'url('+url+') 50px 75px no-repeat';
-    // body.style.backgroundColor = '#272727';
-    // body.style.marginBottom= '100px';
+function initBrowser() {
+
+    let settings = [];
+    let count = 14;
+    for (var i = 1; i < count ; i++) {
+        let obj =             {
+            breakpoint: 2500 - (180 * i),
+            settings: {
+                slidesToShow: count - (i + 1),
+                slidesToScroll: 1
+            }
+        };
+        settings.push(obj)
+    }
     
+
+
+    $('.last-seen-carousel').slick({
+        slidesToShow: count,
+        slidesToScroll: 1,
+        speed: 300,
+        nextArrow: $("#last-seen-next"),
+        prevArrow: $("#last-seen-prev"),
+        responsive: settings,
+    });
+    console.log("xd v2");
 }
